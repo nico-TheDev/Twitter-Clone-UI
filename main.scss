@@ -1,0 +1,431 @@
+$border:#202327;
+$twitter:#1DA1F2;
+$bg:#202327;
+
+*,
+*::before,
+*::after{
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+html{
+    box-sizing: border-box;
+}
+
+body{
+    line-height: 1.5;
+    font-family: 'Montserrat',sans-serif;
+}
+
+.container{
+    min-height: 100vh;
+    background-color: black;
+    color: white;
+}
+
+@mixin query($breakpoint){
+
+    @if ($breakpoint == tabl){
+        @media only screen and (max-width:1200px){@content};
+    }
+    @if ($breakpoint == tabp){
+        @media only screen and (max-width:900px){@content};
+    }
+    @if ($breakpoint == cp){
+        @media only screen and (max-width:700px){@content};
+    }
+    @if ($breakpoint == tabl){
+        @media only screen and (min-width:1800px){@content};
+    }
+}
+
+// NAVBAR
+
+
+.navbar{
+    position: fixed;
+    width: 20vw;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding: 1rem 0.5rem 1rem 4rem;
+    display: grid;
+    justify-items: start;
+    align-items: center;
+    border: 1px solid $border;
+    background-color: black;
+    z-index: 10;
+
+    @include query(tabl){
+        width: 10vw;
+        padding: 1rem;
+        justify-items: center;
+    }
+    @include query(tabp){
+        width: min-content;
+    }
+
+    @include query(cp){
+        display: none;
+ }
+
+    span{
+
+        @include query(tabl){
+            display: none;
+        }
+    }
+
+    .quill{
+        display: none;
+
+        @include query(tabp){
+            display: block;
+        }
+    }
+
+    &__icon{
+        fill: currentColor;
+        margin-right: 1.2rem;
+        margin-top: -3px;
+
+        @include query(tabl){
+            margin-right: 0;
+        }
+    }
+
+    &__link{
+        display: inline-block;
+        color: white;
+        display: flex;
+        align-items: center;
+        font-size: 1.1rem;
+        font-weight: bold;
+        padding: 0.7rem 0.8rem;
+        border-radius: 3rem;
+        transition: all 400ms;
+
+        
+
+        &:hover{
+            background-color: rgba($twitter,0.3);
+            color: $twitter;
+        }
+       
+        
+    }
+}
+
+
+.current{
+  color: $twitter;
+}
+
+.circle{
+   margin-right: 0;
+}
+
+
+.btn{
+    position: relative;
+    z-index: 9999f;
+    background-color: $twitter;
+    border: none;
+    font-size: 1rem;
+    width: 80%;
+    padding: 0.7rem;
+    border-radius: 2rem;
+    color: white;
+    cursor: pointer;
+    transition: all 400ms;
+    &:hover{
+        background-color: darken($twitter,10%);
+    }
+}
+
+
+
+.sidebar{
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 29vw;
+    height: 100%;
+    color: white;
+    border: 1px solid $border;
+
+    padding: 0 2rem;
+    overflow-y: scroll;
+
+    @include query(tabp){
+        display: none;
+    }
+
+    // 
+    &__search{
+        height: 7vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 28vw;
+        background-color: black;
+        
+    
+
+        form{
+            width: 90%;
+            display: flex;
+            align-items: center;
+
+            .icon{
+                position: relative;
+                z-index: 2;
+                margin-right: -1.5rem;
+                width: 1.1rem;
+                height: 1.1rem;
+            }
+        }
+    }
+
+    &__searchbar{
+        width: 100%;
+        font-size: 0.8rem;
+        padding: 0.7rem 1rem 0.7rem 2rem;
+        border: none;
+        border-radius: 3rem;
+        background-color: $bg;
+        color: inherit;
+    }
+
+    &__icon{
+        fill: currentColor;
+    }
+
+}
+
+
+.trends{
+    margin-top: 8vh;
+    background-color: $bg;
+    border-radius: 1rem;
+    &__head{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+    }
+
+    & > *:not(:last-child){
+        border-bottom: 1px solid white;
+        padding: 0.5rem;
+    }
+}
+
+
+.trend{
+    display: flex;
+    &__span{
+        display: block;
+
+        &:first-child,
+        &:last-child
+        {
+            font-size: 0.8rem;
+        }
+
+        &:nth-child(2){
+            font-weight: bold;
+        }
+    }
+
+    &__item{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0.6rem;
+    }
+}
+
+.icon{
+    width: 1.5rem;
+    height: 1.5rem;
+    color: currentColor;
+}
+
+
+// MAIN
+
+// 
+.main{
+    width: 50vw;
+    margin: 0 30vw 0 20vw;
+    padding: 1rem 0;
+    position: relative;
+    overflow-y: auto;
+
+    @include query(tabl){
+        width: 60vw;
+        margin: 0 30vw 0 10vw;
+    }
+
+    @include query(tabp){
+        width: 90vw;
+        margin-left: 10vw;
+    }
+
+    @include query(cp){
+        width: 100vw;
+        margin: 0;
+ }
+
+
+    &__head{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 8vh;
+        background-color:black;
+        top: 0;
+        left: 20vw;
+        position: fixed;
+        width: 50vw;
+        padding: 0 1rem;
+        border-bottom: 1px solid $border;
+
+        @include query(tabl){
+            width: 60vw;
+            left: 10vw;
+        }
+
+        @include query(tabp){
+            width: 90vw;
+        }
+
+        @include query(cp){
+            width: 100vw;
+            left: 0;
+     }
+    }
+}
+
+.tweeter{
+    margin-top: 8vh;
+    display: flex;
+    padding: 0 1rem 0.5rem 1rem;
+    border-bottom: 5px solid $border;
+
+    &__profile{
+        width: 3rem;
+        height:3rem;
+        border-radius: 50%;
+        margin-right: 1rem;
+        fill: currentColor;
+    }
+
+    &__text{
+        flex: 1;
+    }
+    &__input{
+        font-size: 1.3rem;
+        border: none;
+        background-color: black;
+        padding: 0.5rem;
+        color: white;
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    &__icons{
+        display: flex;
+        align-items: center;
+
+        .btn{
+            width: 5rem;
+            margin-left: auto;
+        }
+    }
+
+    &__icon{
+        fill: $twitter;
+        margin: 0 0.5rem;
+        cursor: pointer;
+    }
+
+}
+
+
+.tweets{
+    display: flex;
+    padding: 1rem 0.5rem;
+    border-bottom: 1px solid $border;
+    padding-bottom: 1rem;
+    width: 100%;
+    &__profile{
+        width:3rem;
+        height: 3rem;
+        border-radius: 50%;
+        margin-right: 1.3rem;
+    }
+
+    &__text{
+        flex: 1;
+    }
+
+    &__user{
+
+    }
+
+    &__img{
+        width: 100%;
+    }
+
+    &__username{
+        color: gray;
+    }
+
+    &__content{
+        margin: 0.5rem 0;
+    }
+
+    &__icons{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1rem;
+    }
+}
+
+.poptweet{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(white,0.4);
+    position: absolute;
+    z-index: 20;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    display: none;
+
+
+
+    .tweeter{
+        width: 50vw;
+        border-bottom: none;
+        border: 1px solid $border;
+        padding: 1rem;
+        background-color: black;
+    }
+}
+
+
+.active{
+    display: flex;
+}
